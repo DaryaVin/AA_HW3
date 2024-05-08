@@ -1,0 +1,45 @@
+#status{
+    padding: 2px 4px 2px 4px;
+    border-radius: 100px;
+    display: block;
+    width: fit-content;
+    svg{
+        margin-right: 4px;
+    }
+    &.Not{
+        background-color: #E8EDF3;
+        circle{
+            fill: #BBBFC4;
+        }
+    }
+    &.Now{
+        background-color: #E3F3FC;
+        circle{
+            fill: #6CBFEF;
+        }
+    }
+    &.Ready{
+        background-color: #EBEBFF;
+        circle{
+            fill: #6253DA;
+        }
+    }
+    &.Done{
+        background-color: #EEF8E8;
+        circle{
+            fill: #A3D982;
+        }
+    }
+    &.Blocked{
+        background-color: #FBE7E5;
+        circle{
+        fill: #F0766B;
+        }
+    }
+    &.Cancelled{
+        background-color: #ECEDEF;
+        circle{
+            fill: #BBBFC4;
+        }
+    }
+}
