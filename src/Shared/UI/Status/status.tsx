@@ -23,13 +23,14 @@ export function giveClassStatus (status: string, twoClass?: string) {
         }
     }
 }
+interface Props {
+    statusTask: string;
+}
 
-function Status(){
+const Status: React.FC<Props> = (props) => {
 
     // Here we will change value of status by props when we will create columns
-    const [status] = useState<string>('Not Started')
-
-    
+    const [status] = useState(props.statusTask);
 
     return(
         <span id='status' className={giveClassStatus(status)}>

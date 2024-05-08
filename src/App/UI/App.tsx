@@ -6,7 +6,7 @@ import Status from "../../Shared/UI/Status/status";
 function App() {
   return(
     <div className="App">
-      <Status/>
+      {/* <Status/> */}
       <ColumnCard/>
     </div>
   ) 
