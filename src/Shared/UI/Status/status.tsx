@@ -1,20 +1,35 @@
 import React, { useState } from "react";
 import './style.scss'
 
-function Status(){
-
-    const [status] = useState<string>('Ready')
-
-    function giveClassStatus (status: string) {
-        if (status === 'Not started'){
+export function giveClassStatus (status: string, twoClass?: string) {
+    if (status === 'Not started'){
+        if(twoClass){
+            return `${twoClass} Not`
+        } else{
             return 'Not';
-        } else if(status === 'In progress'){
+        }
+    } else if(status === 'In progress'){
+        if(twoClass){
+            return `${twoClass} Now`
+        } else{
             return 'Now'
         }
-        else {
+    }
+    else {
+        if(twoClass){
+            return `${twoClass} ${status}`
+        } else{
             return status;
         }
     }
+}
+
+function Status(){
+
+    // Here we will change value of status by props when we will create columns
+    const [status] = useState<string>('Not Started')
+
+    
 
     return(
         <span id='status' className={giveClassStatus(status)}>
