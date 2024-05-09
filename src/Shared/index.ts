@@ -5,6 +5,7 @@ import { Button } from "./UI/Button/ui";
 import { ColorSelect } from "./UI/ColorSelect/ui";
 import { ValidationMessage } from "./UI/ValidationMessage/ui";
 import { useValidationFieldForm } from "./Hooks/useValidation";
+import Status from "./UI/Status/status";
 
 export {
   Select,
@@ -14,6 +15,7 @@ export {
   ColorSelect,
   ValidationMessage,
   useValidationFieldForm,
+  Status,
 };
 
 // Доделать импорты для стора

@@ -1,30 +1,35 @@
-import { useState } from "react";
-import { Input } from "../../../../Shared/UI/Input/ui";
+import React from "react";
 import Status from "../../../../Shared/UI/Status/status";
-import Tag from "../../../../Shared/UI/Tag/ui";
-import './style.scss'
+import "./style.scss";
+import Tag from "../../../../Shared/UI/Tag/Ui";
+import { TaskItem } from "../type";
 
-interface Props {
-    titleColumn: string;
-    // description: string;
+interface Props extends TaskItem {
+  // titleColumn: string;
+  color: string;
+  // description: string;
 }
 
-const TaskCard: React.FC<Props> = (props) => {
-
-    const [title] = useState<string>("Make a nice background")
-    const [description] = useState<string>("Hope this simple kanban helps in running the UX processes without leaving figma")
-    const [status] = useState(props.titleColumn);
-    return (
-        <div className='card'>
-            <h5 className="title">{title}</h5>
-            <p>{description}</p>
-            <Status statusTask = {status}/>
-            <div className='tags'>
-                <Tag nameOfTag="Kossom Elsisi"/>
-                <Tag nameOfTag="Kossom Elsisi"/>
-            </div>
-        </div>
-    )
-}
+const TaskCard = ({ name, description, status, tag, color }: Props) => {
+  // const [title] = useState<string>("Make a nice background");
+  // const [description] = useState<string>(
+  //   "Hope this simple kanban helps in running the UX processes without leaving figma"
+  // );
+  // const [status] = useState(props.titleColumn);
+  return (
+    <div className="card">
+      <h5 className="title">{name}</h5>
+      <p>{description}</p>
+      <Status statusTask={status} color={color} />
+      <ul className="tags">
+        {tag.map((tag) => {
+          return <li key={tag}>{tag}</li>;
+        })}
+        <Tag nameOfTag="Kossom Elsisi" />
+        <Tag nameOfTag="Kossom Elsisi" />
+      </ul>
+    </div>
+  );
+};
 
 export default TaskCard;
