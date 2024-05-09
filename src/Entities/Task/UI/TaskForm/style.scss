@@ -1,0 +1,44 @@
+@import "../../../../Shared/Style/generalStyle.scss";
+.taskForm__tagsFieldset {
+  width: 100%;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+.taskForm__tagsLegend {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  justify-content: start;
+  text-align: start;
+  @include paragraph2-bold;
+  margin-bottom: 15px;
+}
+.taskForm__tagsList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.taskForm__tagsItem {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.taskForm__delBtnTag {
+  height: 56px;
+}

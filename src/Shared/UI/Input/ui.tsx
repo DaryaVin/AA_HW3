@@ -13,7 +13,7 @@ export interface InputProps
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onBlur?: () => void;
+  onDirty?: () => void;
 }
 
 const InputField = forwardRef(
@@ -27,7 +27,7 @@ const InputField = forwardRef(
       disabled = false,
       setValue,
       isError,
-      onBlur,
+      onDirty,
       ...props
     }: InputProps,
     ref
@@ -66,11 +66,14 @@ const InputField = forwardRef(
             ref={innerTextAreaRef}
             value={value}
             className={
-              "input__field" + (value !== "" ? " input__field_filled" : "")
+              "input__field input__field_textarea" +
+              (value !== "" ? " input__field_filled" : "")
             }
             onChange={onChangeInputValue}
             disabled={disabled}
-            onBlur={onBlur}
+            onBlur={() => {
+              if (onDirty) onDirty();
+            }}
           />
         ) : (
           <input
@@ -83,7 +86,10 @@ const InputField = forwardRef(
             }
             onChange={onChangeInputValue}
             disabled={disabled}
-            onBlur={onBlur}
+            onBlur={(e) => {
+              if (props.onBlur) props.onBlur(e);
+              if (onDirty) onDirty();
+            }}
           />
         )}
       </label>

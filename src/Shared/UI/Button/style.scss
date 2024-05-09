@@ -18,7 +18,8 @@
     cursor: auto;
   }
 }
-
+.button_theme_onlyContent {
+}
 .button_theme_roundWithPlus {
   border-radius: 50%;
   font-size: 0;
@@ -77,4 +78,9 @@
   &:active:not(:disabled) {
     background-color: rgba(110, 65, 226, 0.16);
   }
+}
+.button__label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

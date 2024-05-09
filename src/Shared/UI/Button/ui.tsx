@@ -9,7 +9,7 @@ interface anchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 interface generalProps {
   label?: React.ReactNode;
-  theme?: "withBorder" | "fillBcg" | "roundWithPlus";
+  theme?: "withBorder" | "fillBcg" | "roundWithPlus" | "onlyContent";
 }
 export type ButtonProps = generalProps & (buttonProps | anchorProps);
 
@@ -26,7 +26,7 @@ export const Button = ({
     "button" + (className ? " " + className : "") + " button_theme_" + theme;
 
   const content = (
-    <span>
+    <span className="button__label">
       {label} {children}
     </span>
   );

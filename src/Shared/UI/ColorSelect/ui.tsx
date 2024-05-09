@@ -10,7 +10,7 @@ interface SelectProps {
   options: string[];
   className?: string;
   isError?: boolean;
-  onDirty?: (v: boolean) => void;
+  onDirty?: () => void;
   multiple?: boolean;
   value: string[] | string;
   setValue: (val: string[] | string) => void;
@@ -34,7 +34,7 @@ export const ColorSelect = ({
       setIsShowTrueFirst(true);
     }
     if (!isShow && isShowTrueFirst && onDirty) {
-      onDirty(true);
+      onDirty();
     }
   }, [isShow]);
 

@@ -2,6 +2,6 @@ export interface TaskItem {
   id: string;
   name: string;
   description: string;
-  tag: string[];
+  tags: string[];
   status: string;
 }

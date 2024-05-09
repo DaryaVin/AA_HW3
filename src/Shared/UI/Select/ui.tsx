@@ -60,7 +60,7 @@ export const Select = ({
         aria-haspopup="listbox"
         aria-expanded={show}
         onClick={(e) => {
-          onClickSelectBtn(e, true);
+          onClickSelectBtn(e, !show);
         }}
         tabIndex={0}
         onKeyDown={(e) => {

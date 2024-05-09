@@ -73,3 +73,8 @@
     transform: scaleX(1);
   }
 }
+
+.input__field_textarea {
+  resize: vertical;
+  min-height: 100px;
+}

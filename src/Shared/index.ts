@@ -3,17 +3,8 @@ import { Input } from "./UI/Input/ui";
 import { Form } from "./UI/Form/ui";
 import { Button } from "./UI/Button/ui";
 import { ColorSelect } from "./UI/ColorSelect/ui";
-import { ValidationMessage } from "./UI/ValidationMessage/ui";
-import { useValidationFieldForm } from "./Hooks/useValidation";
+import { ValidationWrap } from "./UI/ValidationWrap/ui";
 
-export {
-  Select,
-  Input,
-  Form,
-  Button,
-  ColorSelect,
-  ValidationMessage,
-  useValidationFieldForm,
-};
+export { Select, Input, Form, Button, ColorSelect, ValidationWrap };
 
 // Доделать импорты для стора
