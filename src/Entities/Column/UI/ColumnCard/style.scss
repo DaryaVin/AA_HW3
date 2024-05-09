@@ -31,8 +31,12 @@
             justify-content: right;
             gap: 10px;
             align-items: center;
-            .x-icon{
-                transform: rotate(45deg);
+            button{
+                padding: 0;
+                border: none;
+                &.x-icon{
+                    transform: rotate(45deg);
+                }
             }
         }
     }

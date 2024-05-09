@@ -31,6 +31,17 @@ function App() {
           id={"dkcmckd"}
           description="kdnckdckdkdckdcm kfm kfm kmf mkf mkf mkf mfk mfk mfk mkf mfmkn "
         />
+      </ColumnCard>
+      
+      <ColumnCard color={{ r: 255, g: 0, b: 255 }} name={"Done"} position={2} id={"two"}>
+        <TaskCard
+          status={"Done"}
+          color={{ r: 255, g: 0, b: 255 }}
+          name="Kossom Elsisi"
+          tag={["Kossom Elsisi", "Kossom Elsisi"]}
+          id={"dkcmckd"}
+          description="Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi "
+        />
         <TaskCard
           status={"ldmd"}
           color={{ r: 255, g: 0, b: 255 }}
