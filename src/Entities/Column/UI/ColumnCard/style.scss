@@ -1,14 +1,40 @@
 .column {
     width: 256px;
     height: calc(100% - 80px);
-    h3{
-        font-family: Inter;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 28px;
-        text-align: left;
-        margin: 0 0 12px 0;
-
+    .head{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .head-title{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 10px;
+            h3{
+                font-family: Inter;
+                font-size: 24px;
+                font-weight: 700;
+                line-height: 28px;
+                text-align: left;
+            }
+            .add-task{
+                width: 30px;
+                height: 30px;
+                padding: 0;
+                border-radius: 50%;
+                color: white;
+                background-color: #6e41e2;
+            }
+        }
+        .edit-del{
+            display: flex;
+            justify-content: right;
+            gap: 10px;
+            align-items: center;
+            .x-icon{
+                transform: rotate(45deg);
+            }
+        }
     }
     .cards{
         height: 100%;
