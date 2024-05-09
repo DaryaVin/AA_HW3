@@ -1,30 +1,27 @@
 import React, { cloneElement, useState } from "react";
 import "./style.scss";
-import { giveClassStatus } from "../../../../Shared/UI/Status/status";
 import { ColumnItem } from "../../Modal/type";
 
 interface ColumnCardProps extends ColumnItem {
-  children: JSX.Element[];
+    children: JSX.Element[];
 }
 
-function ColumnCard({ children, color, name }: ColumnCardProps) {
-  //then we will take this value from user
-  const [callOfColumn] = useState<string>("Done");
+function ColumnCard({ children, color, name , id , position}: ColumnCardProps) {
 
-  return (
-    <div className="column">
-      <h3>{name}</h3>
-      <div className={giveClassStatus(callOfColumn, "cards")}>
-        {children.map((child) => {
-          return cloneElement(child, {
-            ...child.props,
-            color: color,
-          });
-        })}
-
-        {/* <TaskCard titleColumn={callOfColumn}/> */}
-      </div>
-    </div>
-  );
+    return (
+        <div className="column" id={id} >
+            <h3>{name}</h3>
+            <div className="cards" style={{
+                backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b}, 20%)`
+            }}>
+                {children.map((child) => {
+                    return cloneElement(child, {
+                        ...child.props,
+                        color: color,
+                    });
+                })}
+            </div>
+        </div>
+    );
 }
 export default ColumnCard;
