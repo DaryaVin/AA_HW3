@@ -12,7 +12,7 @@ function App() {
           color={{ r: 255, g: 0, b: 255 }}
           name="Kossom Elsisi"
           tag={["Kossom Elsisi", "Kossom Elsisi"]}
-          id={"dkcmckd"}
+          id={"1"}
           description="Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi "
         />
         <TaskCard
@@ -20,7 +20,7 @@ function App() {
           color={{ r: 255, g: 0, b: 255 }}
           name="mvkvm"
           tag={["djnjdn", "djdmc"]}
-          id={"dkcmckd"}
+          id={"2"}
           description="kdnckdckdkdckdcm kfm kfm kmf mkf mkf mkf mfk mfk mfk mkf mfmkn "
         />
         <TaskCard
@@ -28,11 +28,11 @@ function App() {
           color={{ r: 255, g: 0, b: 255 }}
           name="mvkvm"
           tag={["djnjdn", "djdmc"]}
-          id={"dkcmckd"}
+          id={"3"}
           description="kdnckdckdkdckdcm kfm kfm kmf mkf mkf mkf mfk mfk mfk mkf mfmkn "
         />
       </ColumnCard>
-      
+
       <ColumnCard color={{ r: 255, g: 0, b: 255 }} name={"Done"} position={2} id={"two"}>
         <TaskCard
           status={"Done"}
