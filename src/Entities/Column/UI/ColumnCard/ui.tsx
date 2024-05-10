@@ -7,11 +7,18 @@ import { Button } from "../../../../Shared";
 interface ColumnCardProps extends ColumnItem {
     children: JSX.Element[];
 }
+type CustomCSSProperties = {
+    '--scrollbar-color': string;
+};
 
 function ColumnCard({ children, color, name , id , position}: ColumnCardProps) {
 
+    const customCSSProperties: CustomCSSProperties = {
+        '--scrollbar-color': `rgb(${color.r}, ${color.g}, ${color.b}, 70%)`,
+    };
+
     return (
-        <div className="column" id={id} >
+        <div className="column" id={id} style={customCSSProperties as React.CSSProperties}  >
             <div className="head">
                 <div className="head-title">
                     <h3>{name}</h3>
