@@ -27,10 +27,7 @@
             }
         }
         .edit-del{
-            display: flex;
-            justify-content: right;
-            gap: 10px;
-            align-items: center;
+            display: none;
             button{
                 padding: 0;
                 border: none;
@@ -38,6 +35,14 @@
                     transform: rotate(45deg);
                 }
             }
+        }
+    }
+    &:hover{
+        .edit-del{
+            display: flex;
+            justify-content: right;
+            gap: 10px;
+            align-items: center;
         }
     }
     .cards{

@@ -11,7 +11,7 @@ function App() {
           status={"Done"}
           color={{ r: 255, g: 0, b: 255 }}
           name="Kossom Elsisi"
-          tag={["Kossom Elsisi", "Kossom Elsisi"]}
+          tag={["Kossom Elsisi", "Kossom Elsisi", "Kossom Elsisi","Kossom Elsisi","Kossom Elsisi","Kossom Elsisi",]}
           id={"1"}
           description="Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi Kossom Elsisi "
         />

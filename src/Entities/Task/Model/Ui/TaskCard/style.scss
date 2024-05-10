@@ -19,10 +19,7 @@
             text-align: left;
         }
         .edit-del{
-            display: flex;
-            justify-content: right;
-            align-items: center;
-            gap: 10px;
+            display: none;
             button{
                 padding: 0;
                 border: none;
@@ -30,6 +27,14 @@
                     transform: rotate(45deg);
                 }
             }
+        }
+    }
+    &:hover{
+        .edit-del{
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            gap: 10px;
         }
     }
     p{
@@ -49,6 +54,7 @@
         align-items: center;
         justify-content: left;
         gap: 5px;
+        flex-wrap: wrap;
     }
     ul{
         padding: 0;
