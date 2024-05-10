@@ -82,3 +82,9 @@ export const deleteColumnActionCreator =
       );
     }
   };
+
+export const changeColumnFilter =
+  (filterText: string) => (dispatch: AppDispatch) => {
+    const { onChangeFilter } = ColumnsSlice.actions;
+    dispatch(onChangeFilter(filterText));
+  };

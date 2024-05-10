@@ -18,7 +18,6 @@ export const UpdateColumnForm = ({
 }: UpdateColumnFormProps) => {
   const dispatch = useAppDispatch();
   const saveFunc = async (item: ColumnItem) => {
-    console.log("UpdateColumnForm save", item);
     const itemThatComesAfterInNewPlace = columnsList.find((column) => {
       return column.position === item.position;
     });

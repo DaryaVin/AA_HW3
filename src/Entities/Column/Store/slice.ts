@@ -5,11 +5,13 @@ interface initialStateProps {
   columns: ColumnItem[];
   isLoading: boolean;
   error: string | null;
+  filter: string;
 }
 const initialState: initialStateProps = {
   columns: [],
   isLoading: false,
   error: null,
+  filter: "",
 };
 
 export const ColumnsSlice = createSlice({
@@ -71,6 +73,10 @@ export const ColumnsSlice = createSlice({
     onDeleteColumnError(state, action: PayloadAction<string | null>) {
       state.isLoading = false;
       state.error = action.payload;
+    },
+    // ---------------------------------------------------------------------------------
+    onChangeFilter(state, action: PayloadAction<string>) {
+      state.filter = action.payload;
     },
   },
 });
