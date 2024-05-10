@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./style.scss";
-import { Portal } from "../Portal/ui";
 import { ModalProps } from "./modal";
+import { Portal } from "../Portal/ui";
 
 export const Modal = ({
   children,
@@ -17,10 +17,8 @@ export const Modal = ({
     }
   }, [isShow]);
   useEffect(() => {
-    () => {
-      return () => {
-        document.body.style.overflow = "auto";
-      };
+    return () => {
+      document.body.style.overflow = "auto";
     };
   });
 

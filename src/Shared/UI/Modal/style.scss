@@ -1,4 +1,4 @@
-@import "../../Style/globalStyleVariables.scss";
+@import "../../Style/generalStyle.scss";
 
 .modal {
   position: fixed;
@@ -20,16 +20,19 @@
   display: none;
 }
 .modal__window {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
   position: relative;
-  background-color: $baseColor;
+  background-color: $WhiteColor;
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 100px;
   min-height: 100px;
-  width: auto;
-  height: auto;
-  overflow: auto;
+  // width: auto;
+  // height: auto;
+  overflow: scroll;
 }
 .modal__closeBtn {
   cursor: pointer;
@@ -37,7 +40,7 @@
   width: 50px;
   height: 50px;
   font-size: 0;
-  background-color: $baseColor;
+  background-color: $WhiteColor;
   position: absolute;
   top: 0;
   right: 0;
@@ -49,7 +52,7 @@
     width: 100%;
     height: 3px;
     position: absolute;
-    background-color: $primaryColor;
+    background-color: $PrimaryColor;
     transform-origin: center;
     top: 50%;
     left: 0;
@@ -62,16 +65,16 @@
   }
 }
 .modal__closeBtn_color_base {
-  background-color: $primaryColor;
+  background-color: $PrimaryColor;
   &::after,
   &::before {
-    background-color: $baseColor;
+    background-color: $WhiteColor;
   }
 }
 .modal__closeBtn_color_primary {
-  background-color: $baseColor;
+  background-color: transparent;
   &::after,
   &::before {
-    background-color: $primaryColor;
+    background-color: $PrimaryColor;
   }
 }

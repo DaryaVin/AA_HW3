@@ -1,8 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import TasksReducer from "../../Entities/Task/Store/slice";
 
 const rootReducer = combineReducers({
-  // Вставить слайсы
+  TasksReducer,
 });
 
 export const setupStore = () => {

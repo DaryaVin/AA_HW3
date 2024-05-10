@@ -1,31 +1,30 @@
 import React from "react";
-import { createTaskActionCreator } from "../../Store/actionCreators";
-import { TaskForm } from "../TaskForm/ui";
 import { TaskItem } from "../../Model/type";
+import { TaskForm } from "../TaskForm/ui";
 import { useAppDispatch } from "../../../../Shared";
+import { updateTaskActionCreator } from "../../Store/actionCreators";
 
-interface CreateTaskFormProps {
-  status: string;
+interface UpdateTaskFormProps {
+  taskItem: TaskItem;
   onClickSaveBtn?: (v?: TaskItem) => void;
   onClickCanselBtn?: () => void;
 }
-export const CreateTaskForm = ({
-  status,
+export const UpdateTaskForm = ({
+  taskItem,
   onClickSaveBtn,
   onClickCanselBtn,
-}: CreateTaskFormProps) => {
+}: UpdateTaskFormProps) => {
   const dispatch = useAppDispatch();
-
   const saveFunc = async (item: TaskItem) => {
-    dispatch(createTaskActionCreator(item));
+    dispatch(updateTaskActionCreator(item));
     if (onClickSaveBtn) onClickSaveBtn(item);
   };
 
   return (
     <TaskForm
-      name="Create Task"
-      status={status}
+      name="Update Task"
       saveFunc={saveFunc}
+      initialTaskItem={taskItem}
       canselFunc={() => {
         if (onClickCanselBtn) onClickCanselBtn();
       }}

@@ -1,4 +1,8 @@
 @import "../../../../Shared/Style/generalStyle.scss";
+.taskForm {
+  padding: 20px;
+  width: 100%;
+}
 .taskForm__tagsFieldset {
   width: 100%;
   border: 0;
@@ -36,7 +40,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   gap: 10px;
 }
 .taskForm__delBtnTag {

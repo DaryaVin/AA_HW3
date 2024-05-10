@@ -16,13 +16,14 @@ type TaskFormProps = (
   name: string;
   saveFunc: (item: TaskItem) => void;
   canselFunc: () => void;
-};
+} & React.FormHTMLAttributes<HTMLFormElement>;
 export const TaskForm = ({
   initialTaskItem,
   status,
   name,
   saveFunc,
   canselFunc,
+  ...props
 }: TaskFormProps) => {
   const initialValue: TaskItem =
     initialTaskItem ||
@@ -82,7 +83,12 @@ export const TaskForm = ({
   );
 
   return (
-    <Form name={name} buttonBlock={[saveBtn, canselBtn]} className="taskForm">
+    <Form
+      {...props}
+      name={name}
+      buttonBlock={[saveBtn, canselBtn]}
+      className="taskForm"
+    >
       <ValidationWrap
         required
         maxlength={50}
