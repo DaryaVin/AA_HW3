@@ -33,6 +33,12 @@
                 &.x-icon{
                     transform: rotate(45deg);
                 }
+                &:hover:not(:disabled) {
+                    background-color: white;
+                }
+                &:active:not(:disabled) {
+                    background-color: white;
+                }
             }
         }
     }

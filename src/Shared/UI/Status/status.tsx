@@ -13,6 +13,7 @@ interface Props {
 const Status = ({ color, statusTask } : Props) => {
   return (
     <span
+      className="status"
       id="status"
       style={{
         backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b}, 20%)`
