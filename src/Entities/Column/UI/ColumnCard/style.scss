@@ -114,9 +114,9 @@
         }
     }
 }
-@media (max-width: 480px){
+@media (max-width: 375px){
     .column{
-        width: 200px;
+        width: 220px;
         .head .head-title h3{
             @include paragraph1-bold;
         }
