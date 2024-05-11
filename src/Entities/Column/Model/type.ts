@@ -1,6 +1,10 @@
 export interface ColumnItem {
   id: string;
   name: string;
-  color: string;
+  color: {
+    r: number;
+    g: number;
+    b: number;
+  };
   position: string;
 }

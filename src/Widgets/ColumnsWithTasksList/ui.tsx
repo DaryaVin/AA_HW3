@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../Shared";
 import { ColumnItem } from "../../Entities/Column";
+import { ColumnCardWrap, TaskCardWrap } from "../../Features";
 
 export const ColumnsWithTasksList = () => {
   const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
@@ -51,14 +52,29 @@ export const ColumnsWithTasksList = () => {
           ? filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
               return (
                 <li key={column.id}>
-                  <span>{column.name}</span>
+                  <ColumnCardWrap ColumnItem={column}>
+                    {TasksState.tasks
+                      .filter((task) => task.status === column.name)
+                      .map((task) => {
+                        return (
+                          <li key={task.id}>
+                            <TaskCardWrap
+                              TaskItem={task}
+                              color={column.color}
+                            />
+                          </li>
+                        );
+                      })}
+                  </ColumnCardWrap>
+
+                  {/* <span>{column.name}</span>
                   <ul>
                     {TasksState.tasks
                       .filter((task) => task.status === column.name)
                       .map((task) => {
                         return <li key={task.id}>{task.name}</li>;
                       })}
-                  </ul>
+                  </ul> */}
                 </li>
               );
             })

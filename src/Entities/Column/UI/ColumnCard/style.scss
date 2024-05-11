@@ -1,0 +1,71 @@
+@import'../../../../Shared/Style/generalStyle.scss';
+
+.column {
+    width: 256px;
+    height: calc(100% - 80px);
+    .head{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .head-title{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 10px;
+            h3{
+                @include h3;
+                margin: 10px 0;
+            }
+            .add-task{
+                width: 30px;
+                height: 30px;
+                padding: 0;
+                border-radius: 50%;
+                color: white;
+                background-color: #6e41e2;
+            }
+        }
+        .edit-del{
+            display: none;
+            button{
+                padding: 0;
+                border: none;
+                &.x-icon{
+                    transform: rotate(45deg);
+                }
+                &:hover:not(:disabled) {
+                    background-color: white;
+                }
+                &:active:not(:disabled) {
+                    background-color: white;
+                }
+            }
+        }
+    }
+    &:hover{
+        .edit-del{
+            display: flex;
+            justify-content: right;
+            gap: 10px;
+            align-items: center;
+        }
+    }
+    .cards{
+        height: 100%;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid #D6D8DB;
+        position: relative;
+        overflow-y: auto;
+    }
+    ::-webkit-scrollbar{
+        width: 5px;
+    }
+    ::-webkit-scrollbar-track{
+        background-color: white;
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: var(--scrollbar-color);;
+    }
+    
+}
