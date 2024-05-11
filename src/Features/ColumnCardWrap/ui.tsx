@@ -15,7 +15,6 @@ export const ColumnCardWrap = ({
   ColumnItem,
 }: ColumnCardWrapProps) => {
   const dispatch = useAppDispatch();
-  //
   const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
   const TasksState = useAppSelector((state) => state.TasksReducer);
 

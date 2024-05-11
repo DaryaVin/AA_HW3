@@ -1,11 +1,19 @@
-import React from "react";
-import { useAppSelector } from "../../Shared";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../Shared";
 import { ColumnItem } from "../../Entities/Column";
 import { ColumnCardWrap, TaskCardWrap } from "../../Features";
+import { TaskItem } from "../../Entities/Task/Model/type";
+import { updateTaskActionCreator } from "../../Entities/Task/Store/actionCreators";
 
 export const ColumnsWithTasksList = () => {
   const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
   const TasksState = useAppSelector((state) => state.TasksReducer);
+  const dispatch = useAppDispatch();
+
+  const [currentDragTask, setCurrentDragTask] = useState<TaskItem>();
+  const [currentDragColumn, setCurrentDragColumn] = useState<ColumnItem>();
+  const [currentDragColumnElement, setCurrentDragColumnElement] =
+    useState<Element>();
 
   const sortColumns = (columnsList: ColumnItem[]) => {
     const copyColumnsList = [...columnsList];
@@ -47,22 +55,41 @@ export const ColumnsWithTasksList = () => {
       );
     }
 
-    const onDropTask = (e: React.DragEvent<HTMLLIElement>) => {
+    const onDragEndTask = () => {
+      if (currentDragColumnElement instanceof Element) {
+        currentDragColumnElement.setAttribute("style", "transform: scale(1);");
+      }
+      if (currentDragTask && currentDragColumn) {
+        dispatch(
+          updateTaskActionCreator({
+            ...currentDragTask,
+            status: currentDragColumn.name,
+            idColumn: currentDragColumn.id,
+          })
+        );
+      }
+    };
+
+    const onDragOverTask = (
+      e: React.DragEvent<HTMLLIElement>,
+      column: ColumnItem
+    ) => {
       e.preventDefault();
-      console.log("onDropTask", e.target);
-    };
-    const onDragStartTask = (e: React.DragEvent<HTMLLIElement>) => {
-      console.log("onDragStartTask", e.target);
-    };
-    const onDragEndTask = (e: React.DragEvent<HTMLLIElement>) => {
-      console.log("onDragEndTask", e.target);
-    };
-    const onDragLeaveTask = (e: React.DragEvent<HTMLLIElement>) => {
-      console.log("onDragLeaveTask", e.target);
-    };
-    const onDragOverTask = (e: React.DragEvent<HTMLLIElement>) => {
-      e.preventDefault();
-      console.log("onDragOverTask", e.target);
+      if (e.currentTarget instanceof Element && e.target instanceof Element) {
+        e.currentTarget.setAttribute("style", "transform: scale(1.1);");
+
+        if (
+          currentDragColumnElement &&
+          e.currentTarget !== currentDragColumnElement
+        ) {
+          currentDragColumnElement.setAttribute(
+            "style",
+            "transform: scale(1);"
+          );
+        }
+        setCurrentDragColumnElement(e.currentTarget);
+        setCurrentDragColumn(column);
+      }
     };
 
     return (
@@ -70,7 +97,16 @@ export const ColumnsWithTasksList = () => {
         {filterColumns(ColumnsState.columns).length !== 0 ? (
           filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
             return (
-              <li key={column.id}>
+              <li
+                className="ColumnsWithTasksList__columnItem"
+                key={column.id}
+                onDragOver={(e) => {
+                  onDragOverTask(e, column);
+                }}
+                onDragEnd={() => {
+                  onDragEndTask();
+                }}
+              >
                 <ColumnCardWrap ColumnItem={column}>
                   {TasksState.tasks
                     .filter((task) => task.idColumn === column.id)
@@ -79,20 +115,8 @@ export const ColumnsWithTasksList = () => {
                         <li
                           key={task.id}
                           draggable
-                          onDrop={(e) => {
-                            onDropTask(e);
-                          }}
-                          onDragStart={(e) => {
-                            onDragStartTask(e);
-                          }}
-                          onDragEnd={(e) => {
-                            onDragEndTask(e);
-                          }}
-                          onDragLeave={(e) => {
-                            onDragLeaveTask(e);
-                          }}
-                          onDragOver={(e) => {
-                            onDragOverTask(e);
+                          onDragStart={() => {
+                            setCurrentDragTask(task);
                           }}
                         >
                           <TaskCardWrap TaskItem={task} color={column.color} />

@@ -84,8 +84,7 @@ export const apiTemplate = function <T>(url: string) {
         init: {
           method: "DELETE",
         },
-        tryCallbeck: (data) => {
-          console.log("api DELETE", data);
+        tryCallbeck: () => {
           return {
             success: true,
           };

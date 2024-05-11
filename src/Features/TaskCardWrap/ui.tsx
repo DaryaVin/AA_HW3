@@ -16,7 +16,6 @@ interface TaskCardWrapProps {
 }
 export const TaskCardWrap = ({ TaskItem, color }: TaskCardWrapProps) => {
   const dispatch = useAppDispatch();
-  // const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
 
   const [ShowUpdateTask, setShowUpdateTask] = useState<boolean>(false);
 
