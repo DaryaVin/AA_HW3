@@ -3,6 +3,22 @@ import { api } from "../API/api";
 import { ColumnItem } from "../Model/type";
 import { ColumnsSlice } from "./slice";
 
+const fetchUpdate = async (column: ColumnItem, dispatch: AppDispatch) => {
+  const { onUpdateColumn, onUpdateColumnSucces, onUpdateColumnError } =
+    ColumnsSlice.actions;
+  try {
+    dispatch(onUpdateColumn());
+    const result = await api.update(column, column.id);
+    if (result.success === true) {
+      if (result.data) dispatch(onUpdateColumnSucces(result.data));
+    } else {
+      dispatch(onUpdateColumnError(result.error));
+    }
+  } catch (error) {
+    dispatch(onUpdateColumnError(typeof error === "string" ? error : "error"));
+  }
+};
+
 export const getAllColumnActionCreator =
   () => async (dispatch: AppDispatch) => {
     const { onLoadAllColumns, onLoadAllColumnsSucces, onLoadAllColumnsError } =
@@ -24,7 +40,8 @@ export const getAllColumnActionCreator =
   };
 
 export const createColumnActionCreator =
-  (column: ColumnItem) => async (dispatch: AppDispatch) => {
+  (column: ColumnItem, columnsList: ColumnItem[]) =>
+  async (dispatch: AppDispatch) => {
     const { onCreateColumn, onCreateColumnSucces, onCreateColumnError } =
       ColumnsSlice.actions;
     try {
@@ -32,7 +49,23 @@ export const createColumnActionCreator =
 
       const result = await api.create(column);
       if (result.success === true) {
-        if (result.data) dispatch(onCreateColumnSucces(result.data));
+        if (result.data) {
+          const newColumn = result.data;
+          dispatch(onCreateColumnSucces(newColumn));
+
+          const itemThatComesAfter = columnsList.find((item) => {
+            return item.position === column.position;
+          });
+          if (itemThatComesAfter) {
+            fetchUpdate(
+              {
+                ...itemThatComesAfter,
+                position: newColumn.id,
+              },
+              dispatch
+            );
+          }
+        }
       } else {
         dispatch(onCreateColumnError(result.error));
       }
@@ -44,35 +77,54 @@ export const createColumnActionCreator =
   };
 
 export const updateColumnActionCreator =
-  (column: ColumnItem) => async (dispatch: AppDispatch) => {
-    const { onUpdateColumn, onUpdateColumnSucces, onUpdateColumnError } =
-      ColumnsSlice.actions;
-    try {
-      dispatch(onUpdateColumn());
+  (oldColumn: ColumnItem, newColumn: ColumnItem, columnsList: ColumnItem[]) =>
+  async (dispatch: AppDispatch) => {
+    fetchUpdate(newColumn, dispatch);
+    if (oldColumn.position !== newColumn.position) {
+      const columnThatComesAfterInNewPlace = columnsList.find((column) => {
+        return column.position === newColumn.position;
+      });
+      const columnThatComesAfterInOldPlace = columnsList.find((column) => {
+        return column.position === oldColumn.id;
+      });
 
-      const result = await api.update(column, column.id);
-      if (result.success === true) {
-        if (result.data) dispatch(onUpdateColumnSucces(result.data));
-      } else {
-        dispatch(onUpdateColumnError(result.error));
+      if (columnThatComesAfterInNewPlace) {
+        fetchUpdate(
+          { ...columnThatComesAfterInNewPlace, position: newColumn.id },
+          dispatch
+        );
       }
-    } catch (error) {
-      dispatch(
-        onUpdateColumnError(typeof error === "string" ? error : "error")
-      );
+      if (columnThatComesAfterInOldPlace) {
+        fetchUpdate(
+          { ...columnThatComesAfterInOldPlace, position: oldColumn.position },
+          dispatch
+        );
+      }
     }
   };
 
 export const deleteColumnActionCreator =
-  (column: ColumnItem) => async (dispatch: AppDispatch) => {
+  (column: ColumnItem, columnsList: ColumnItem[]) =>
+  async (dispatch: AppDispatch) => {
     const { onDeleteColumn, onDeleteColumnSucces, onDeleteColumnError } =
       ColumnsSlice.actions;
+
+    const columnThatComesAfter = columnsList.find((item) => {
+      return item.position === column.id;
+    });
+
     try {
       dispatch(onDeleteColumn());
 
       const result = await api.delete(column.id);
       if (result.success === true) {
         dispatch(onDeleteColumnSucces(column.id));
+        if (columnThatComesAfter) {
+          fetchUpdate(
+            { ...columnThatComesAfter, position: column.position },
+            dispatch
+          );
+        }
       } else {
         dispatch(onDeleteColumnError(result.error));
       }

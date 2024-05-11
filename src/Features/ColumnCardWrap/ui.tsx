@@ -33,7 +33,7 @@ export const ColumnCardWrap = ({
           setShowUpdateColumn(true);
         }}
         deleteFun={() => {
-          dispatch(deleteColumnActionCreator(ColumnItem));
+          dispatch(deleteColumnActionCreator(ColumnItem, ColumnsState.columns));
         }}
         addFun={() => {
           setShowCreateTask(true);
