@@ -18,29 +18,31 @@ export const UpdateColumnForm = ({
 }: UpdateColumnFormProps) => {
   const dispatch = useAppDispatch();
   const saveFunc = async (item: ColumnItem) => {
-    const itemThatComesAfterInNewPlace = columnsList.find((column) => {
-      return column.position === item.position;
-    });
-    const itemThatComesAfterInOldPlace = columnsList.find((column) => {
-      return column.position === columnItem.position;
-    });
+    if (columnItem.position !== item.position) {
+      const itemThatComesAfterInNewPlace = columnsList.find((column) => {
+        return column.position === item.position;
+      });
+      const itemThatComesAfterInOldPlace = columnsList.find((column) => {
+        return column.position === columnItem.name;
+      });
+      if (itemThatComesAfterInNewPlace) {
+        dispatch(
+          updateColumnActionCreator({
+            ...itemThatComesAfterInNewPlace,
+            position: item.name,
+          })
+        );
+      }
+      if (itemThatComesAfterInOldPlace) {
+        dispatch(
+          updateColumnActionCreator({
+            ...itemThatComesAfterInOldPlace,
+            position: columnItem.position,
+          })
+        );
+      }
+    }
     dispatch(updateColumnActionCreator(item));
-    if (itemThatComesAfterInNewPlace) {
-      dispatch(
-        updateColumnActionCreator({
-          ...itemThatComesAfterInNewPlace,
-          position: item.name,
-        })
-      );
-    }
-    if (itemThatComesAfterInOldPlace) {
-      dispatch(
-        updateColumnActionCreator({
-          ...itemThatComesAfterInOldPlace,
-          position: columnItem.position,
-        })
-      );
-    }
     if (onClickSaveBtn) onClickSaveBtn(item);
   };
 
