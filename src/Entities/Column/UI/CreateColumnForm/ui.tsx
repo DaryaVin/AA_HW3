@@ -18,27 +18,13 @@ export const CreateColumnForm = ({
   const dispatch = useAppDispatch();
 
   const saveFunc = async (item: ColumnItem) => {
-    // const itemThatComesAfter = columnsList.find((column) => {
-    //   return column.position === item.position;
-    // });
     dispatch(createColumnActionCreator(item, columnsList));
-    // if (itemThatComesAfter)
-    //   dispatch(
-    //     updateColumnActionCreator({
-    //       ...itemThatComesAfter,
-    //       position: item.id,
-    //     })
-    //   );
     if (onClickSaveBtn) onClickSaveBtn(item);
   };
-
-  const nameColumnsList = columnsList.map((column) => {
-    return column.id;
-  });
   return (
     <ColumnForm
       name="Create Column"
-      nameColumnsList={nameColumnsList}
+      columnsList={columnsList}
       saveFunc={saveFunc}
       canselFunc={() => {
         if (onClickCanselBtn) onClickCanselBtn();

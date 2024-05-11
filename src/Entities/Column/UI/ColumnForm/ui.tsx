@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import "./style.scss";
 import {
   Button,
   ColorSelect,
@@ -21,7 +20,7 @@ type ColumnFormProps = (
   name: string;
   saveFunc: (item: ColumnItem) => void;
   canselFunc: () => void;
-  nameColumnsList: string[];
+  columnsList: ColumnItem[];
 } & React.FormHTMLAttributes<HTMLFormElement>;
 
 export const ColumnForm = ({
@@ -29,7 +28,7 @@ export const ColumnForm = ({
   name,
   saveFunc,
   canselFunc,
-  nameColumnsList,
+  columnsList,
   ...props
 }: ColumnFormProps) => {
   const initialValue: ColumnItem =
@@ -84,6 +83,14 @@ export const ColumnForm = ({
     />
   );
 
+  const idNameObj: {
+    [key: string]: string;
+  } = {};
+
+  columnsList.forEach((column) => {
+    idNameObj[column.id] = column.name;
+  });
+
   return (
     <Form
       {...props}
@@ -94,6 +101,9 @@ export const ColumnForm = ({
       <ValidationWrap
         required
         maxlength={50}
+        noRepeat={columnsList.map((column) => {
+          return column.name;
+        })}
         setIsValid={(v) => {
           setIsValidName(v);
         }}
@@ -121,7 +131,6 @@ export const ColumnForm = ({
             "RGB(108, 191, 239)",
             "RGB(163, 217, 130)",
             "RGB(240, 118, 107)",
-            "RGB(187, 191, 196)",
           ]}
           label={"Color"}
           value={`RGB(${columnItem.color.r}, ${columnItem.color.g}, ${columnItem.color.b})`}
@@ -152,16 +161,24 @@ export const ColumnForm = ({
       >
         <SelectWithFilter
           label="The column after which is located"
-          value={columnItem.position === "" ? "Put first" : columnItem.position}
+          value={
+            columnItem.position === ""
+              ? "Put first"
+              : idNameObj[columnItem.position]
+          }
           setValue={(v) => {
             if (!Array.isArray(v))
               if (v === "Put first") {
                 setColumnItem({ ...columnItem, position: "" });
               } else {
-                setColumnItem({ ...columnItem, position: v });
+                for (const id in idNameObj) {
+                  if (idNameObj[id] === v) {
+                    setColumnItem({ ...columnItem, position: id });
+                  }
+                }
               }
           }}
-          options={[...nameColumnsList, "Put first"]}
+          options={[...Object.values(idNameObj), "Put first"]}
         />
       </ValidationWrap>
     </Form>

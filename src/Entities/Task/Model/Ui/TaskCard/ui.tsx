@@ -13,8 +13,6 @@ interface Props extends TaskItem {
     g: number;
     b: number;
   };
-  description: string;
-  status: string;
 }
 
 const TaskCard = ({
