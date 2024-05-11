@@ -79,8 +79,8 @@ export const ColumnsWithTasksList = () => {
               );
             })
           : ColumnsState.filter
-          ? "No columns were found by your filter"
-          : "There are no columns yet, create at least one"}
+          ? <span>No columns were found by your filter</span>
+          : <span>There are no columns yet, create at least one</span>}
       </ul>
     );
   }
