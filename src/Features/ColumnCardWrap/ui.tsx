@@ -1,7 +1,7 @@
-import React, { useState,  } from "react";
+import React, { useState } from "react";
 import ColumnCard from "../../Entities/Column/UI/ColumnCard/ui";
 import { Modal } from "../../Shared/UI/Modal/ui";
-import {ColumnItem} from "../../Entities/Column";
+import { ColumnItem } from "../../Entities/Column";
 import { useAppDispatch, useAppSelector } from "../../Shared";
 import { UpdateColumnForm } from "../../Entities/Column";
 import { CreateTaskForm } from "../../Entities/Task";
@@ -11,9 +11,12 @@ interface ColumnCardWrapProps {
   children: JSX.Element[];
   ColumnItem: ColumnItem;
 }
-export const ColumnCardWrap = ({ children, ColumnItem }: ColumnCardWrapProps) => {
+export const ColumnCardWrap = ({
+  children,
+  ColumnItem,
+}: ColumnCardWrapProps) => {
   const dispatch = useAppDispatch();
-  // 
+  //
   const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
 
   const [ShowUpdateColumn, setShowUpdateColumn] = useState<boolean>(false);
@@ -21,30 +24,31 @@ export const ColumnCardWrap = ({ children, ColumnItem }: ColumnCardWrapProps) =>
 
   return (
     <>
-      <ColumnCard  
+      <ColumnCard
         color={ColumnItem.color}
-        name={ColumnItem.name} 
+        name={ColumnItem.name}
         position={ColumnItem.position}
         id={ColumnItem.id}
-        editFun={() => { setShowUpdateColumn(true) }} 
-        deleteFun={() => { dispatch(deleteColumnActionCreator(ColumnItem)) }}
-        addFun={() => { setShowCreateTask(true) }}
-        >
-          {children}
+        editFun={() => {
+          setShowUpdateColumn(true);
+        }}
+        deleteFun={() => {
+          dispatch(deleteColumnActionCreator(ColumnItem));
+        }}
+        addFun={() => {
+          setShowCreateTask(true);
+        }}
+      >
+        {children}
       </ColumnCard>
 
       <Modal setIsShow={setShowUpdateColumn} isShow={ShowUpdateColumn}>
         {ShowUpdateColumn && (
           <UpdateColumnForm
-              columnItem={{
-                id: "",
-                name: "",
-                position: "",
-                color: { r: 0, g: 0, b: 0 },
-              }}
-              columnsList={ColumnsState.columns}
-              onClickSaveBtn={() => {
-                setShowUpdateColumn(false);
+            columnItem={ColumnItem}
+            columnsList={ColumnsState.columns}
+            onClickSaveBtn={() => {
+              setShowUpdateColumn(false);
             }}
             onClickCanselBtn={() => {
               setShowUpdateColumn(false);
@@ -55,7 +59,7 @@ export const ColumnCardWrap = ({ children, ColumnItem }: ColumnCardWrapProps) =>
       <Modal setIsShow={setShowCreateTask} isShow={ShowCreateTask}>
         {ShowCreateTask && (
           <CreateTaskForm
-            status=""
+            status={ColumnItem.name}
             onClickSaveBtn={() => {
               setShowCreateTask(false);
             }}

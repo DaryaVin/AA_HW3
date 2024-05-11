@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Status from "../../../../../Shared/UI/Status/status";
 import "./style.scss";
 import Tag from "../../../../../Shared/UI/Tag/Ui";
@@ -15,7 +15,6 @@ interface Props extends TaskItem {
   };
   description: string;
   status: string;
-  tag: string[]; 
 }
 
 const TaskCard = ({
@@ -23,12 +22,11 @@ const TaskCard = ({
   id,
   description,
   status,
-  tag,
+  tags,
   color,
   deleteFun,
   editFun,
 }: Props) => {
-
   const deleteCard = () => {
     deleteFun();
   };
@@ -82,7 +80,7 @@ const TaskCard = ({
       <p>{description}</p>
       <Status statusTask={status} color={color} />
       <ul className="tags">
-        {tag.map((tag) => {
+        {tags.map((tag) => {
           return (
             <li key={tag}>
               <Tag nameOfTag={tag} />
