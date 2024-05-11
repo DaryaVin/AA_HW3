@@ -100,7 +100,7 @@ export const ColumnForm = ({
     >
       <ValidationWrap
         required
-        maxlength={50}
+        maxlength={15}
         noRepeat={columnsList.map((column) => {
           return column.name;
         })}

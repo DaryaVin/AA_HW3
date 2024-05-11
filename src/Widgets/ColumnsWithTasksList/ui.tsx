@@ -46,6 +46,25 @@ export const ColumnsWithTasksList = () => {
         </div>
       );
     }
+
+    const onDropTask = (e: React.DragEvent<HTMLLIElement>) => {
+      e.preventDefault();
+      console.log("onDropTask", e.target);
+    };
+    const onDragStartTask = (e: React.DragEvent<HTMLLIElement>) => {
+      console.log("onDragStartTask", e.target);
+    };
+    const onDragEndTask = (e: React.DragEvent<HTMLLIElement>) => {
+      console.log("onDragEndTask", e.target);
+    };
+    const onDragLeaveTask = (e: React.DragEvent<HTMLLIElement>) => {
+      console.log("onDragLeaveTask", e.target);
+    };
+    const onDragOverTask = (e: React.DragEvent<HTMLLIElement>) => {
+      e.preventDefault();
+      console.log("onDragOverTask", e.target);
+    };
+
     return (
       <ul className="all-cards">
         {filterColumns(ColumnsState.columns).length !== 0 ? (
@@ -57,7 +76,25 @@ export const ColumnsWithTasksList = () => {
                     .filter((task) => task.idColumn === column.id)
                     .map((task) => {
                       return (
-                        <li key={task.id}>
+                        <li
+                          key={task.id}
+                          draggable
+                          onDrop={(e) => {
+                            onDropTask(e);
+                          }}
+                          onDragStart={(e) => {
+                            onDragStartTask(e);
+                          }}
+                          onDragEnd={(e) => {
+                            onDragEndTask(e);
+                          }}
+                          onDragLeave={(e) => {
+                            onDragLeaveTask(e);
+                          }}
+                          onDragOver={(e) => {
+                            onDragOverTask(e);
+                          }}
+                        >
                           <TaskCardWrap TaskItem={task} color={column.color} />
                         </li>
                       );
