@@ -37,9 +37,13 @@ export const ColumnForm = ({
     ({
       id: "",
       name: "",
-      color: "white",
+      color:{
+        r:0,
+        g: 0,
+        b:0,
+      },
       position: "",
-    } as ColumnItem);
+    }as ColumnItem);
   const [columnItem, setColumnItem] = useState<ColumnItem>(initialValue);
   const [isValidName, setIsValidName] = useState<boolean>(true);
   const [isValidColor, setIsValidColor] = useState<boolean>(true);
@@ -110,14 +114,43 @@ export const ColumnForm = ({
           setIsValidColor(v);
         }}
       >
-        <ColorSelect
+        {/* <ColorSelect
           options={["red", "pink", "blue", "green", "white"]}
           label={"Color"}
           value={columnItem.color}
           setValue={(v) => {
             if (!Array.isArray(v)) setColumnItem({ ...columnItem, color: v });
           }}
+        /> */}
+
+        <ColorSelect
+          options={[
+            "RGB(255, 0, 0)", // Red
+            "RGB(0, 255, 0)", // Green
+            "RGB(0, 0, 255)", // Blue
+            "RGB(0,0,0)",
+            "RGB(255,255,255)",
+          ]}
+          label={"Color"}
+          value={`RGB(${columnItem.color.r}, ${columnItem.color.g}, ${columnItem.color.b})`}
+          setValue={(v) => {
+            if (typeof v === "string") {
+              let colorObj;
+              // Assuming the string format is "RGB(r, g, b)"
+              const matches = v.match(/RGB\((\d+), (\d+), (\d+)\)/);
+              if (matches && matches.length === 4) {
+                const [, r, g, b] = matches.map(Number);
+                colorObj = { r, g, b };
+              } else {
+                // Handle other cases if needed
+                colorObj = { r: 0, g: 0, b: 0 }; // Default to black color
+              }
+              // Now you have your color object, you can use it as needed
+              setColumnItem({ ...columnItem, color: colorObj });
+            }
+          }}
         />
+
       </ValidationWrap>
       <ValidationWrap
         generalDirty={formDirty}

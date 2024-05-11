@@ -13,6 +13,9 @@ interface Props extends TaskItem {
     g: number;
     b: number;
   };
+  description: string;
+  status: string;
+  tag: string[]; 
 }
 
 const TaskCard = ({
@@ -25,21 +28,13 @@ const TaskCard = ({
   deleteFun,
   editFun,
 }: Props) => {
-  // const parent = useRef<HTMLDivElement>(null);
-  // const [isDeleted, setIsDeleted] = useState(false);
 
   const deleteCard = () => {
-    // parent.current?.remove();
-    // setIsDeleted(true);
     deleteFun();
   };
   const editCard = () => {
     editFun();
   };
-
-  // if (isDeleted) {
-  //   return null;
-  // }
 
   return (
     <div className="card" id={id}>

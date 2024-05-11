@@ -1,6 +1,6 @@
 import React, { cloneElement, useRef, useState } from "react";
 import "./style.scss";
-import { ColumnItem } from "../../Modal/type";
+import { ColumnItem } from "../../Model/type";
 import { Button } from "../../../../Shared";
 
 interface ColumnCardProps extends ColumnItem {

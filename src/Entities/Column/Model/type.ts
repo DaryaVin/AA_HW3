@@ -6,5 +6,5 @@ export interface ColumnItem {
     g: number;
     b: number;
   };
-  position: number;
+  position: string;
 }
