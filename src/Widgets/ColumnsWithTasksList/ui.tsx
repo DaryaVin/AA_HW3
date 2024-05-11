@@ -48,30 +48,29 @@ export const ColumnsWithTasksList = () => {
     }
     return (
       <ul className="all-cards">
-        {filterColumns(ColumnsState.columns).length !== 0
-          ? filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
-              return (
-                <li key={column.id}>
-                  <ColumnCardWrap ColumnItem={column}>
-                    {TasksState.tasks
-                      .filter((task) => task.status === column.name)
-                      .map((task) => {
-                        return (
-                          <li key={task.id}>
-                            <TaskCardWrap
-                              TaskItem={task}
-                              color={column.color}
-                            />
-                          </li>
-                        );
-                      })}
-                  </ColumnCardWrap>
-                </li>
-              );
-            })
-          : ColumnsState.filter
-          ? <span>No columns were found by your filter</span>
-          : <span>There are no columns yet, create at least one</span>}
+        {filterColumns(ColumnsState.columns).length !== 0 ? (
+          filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
+            return (
+              <li key={column.id}>
+                <ColumnCardWrap ColumnItem={column}>
+                  {TasksState.tasks
+                    .filter((task) => task.idColumn === column.id)
+                    .map((task) => {
+                      return (
+                        <li key={task.id}>
+                          <TaskCardWrap TaskItem={task} color={column.color} />
+                        </li>
+                      );
+                    })}
+                </ColumnCardWrap>
+              </li>
+            );
+          })
+        ) : ColumnsState.filter ? (
+          <span>No columns were found by your filter</span>
+        ) : (
+          <span>There are no columns yet, create at least one</span>
+        )}
       </ul>
     );
   }

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import ColumnCard from "../../Entities/Column/UI/ColumnCard/ui";
 import { Modal } from "../../Shared/UI/Modal/ui";
-import { ColumnItem } from "../../Entities/Column";
+import { ColumnItem, deleteColumnActionCreator } from "../../Entities/Column";
 import { useAppDispatch, useAppSelector } from "../../Shared";
 import { UpdateColumnForm } from "../../Entities/Column";
-import { CreateTaskForm } from "../../Entities/Task";
-import { deleteColumnActionCreator } from "../../Entities/Column/Store/actionCreator";
+import { CreateTaskForm, deleteTaskActionCreator } from "../../Entities/Task";
 
 interface ColumnCardWrapProps {
   children: JSX.Element[];
@@ -18,6 +17,7 @@ export const ColumnCardWrap = ({
   const dispatch = useAppDispatch();
   //
   const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
+  const TasksState = useAppSelector((state) => state.TasksReducer);
 
   const [ShowUpdateColumn, setShowUpdateColumn] = useState<boolean>(false);
   const [ShowCreateTask, setShowCreateTask] = useState<boolean>(false);
@@ -34,6 +34,11 @@ export const ColumnCardWrap = ({
         }}
         deleteFun={() => {
           dispatch(deleteColumnActionCreator(ColumnItem, ColumnsState.columns));
+          TasksState.tasks.forEach((task) => {
+            if (task.idColumn === ColumnItem.id) {
+              dispatch(deleteTaskActionCreator(task));
+            }
+          });
         }}
         addFun={() => {
           setShowCreateTask(true);
@@ -59,6 +64,7 @@ export const ColumnCardWrap = ({
       <Modal setIsShow={setShowCreateTask} isShow={ShowCreateTask}>
         {ShowCreateTask && (
           <CreateTaskForm
+            idColumn={ColumnItem.id}
             status={ColumnItem.name}
             onClickSaveBtn={() => {
               setShowCreateTask(false);

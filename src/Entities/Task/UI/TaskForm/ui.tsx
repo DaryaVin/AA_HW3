@@ -7,10 +7,12 @@ type TaskFormProps = (
   | {
       initialTaskItem: TaskItem;
       status?: string;
+      idColumn?: string;
     }
   | {
       initialTaskItem?: TaskItem;
       status: string;
+      idColumn: string;
     }
 ) & {
   name: string;
@@ -23,6 +25,7 @@ export const TaskForm = ({
   name,
   saveFunc,
   canselFunc,
+  idColumn,
   ...props
 }: TaskFormProps) => {
   const initialValue: TaskItem =
@@ -33,6 +36,7 @@ export const TaskForm = ({
       description: "",
       tags: [],
       status: status,
+      idColumn,
     } as TaskItem);
   const [taskItem, setTaskItem] = useState<TaskItem>(initialValue);
   const [isValidName, setIsValidName] = useState<boolean>(true);

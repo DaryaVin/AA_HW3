@@ -22,20 +22,14 @@ export const UpdateColumnForm = ({
     if (onClickSaveBtn) onClickSaveBtn(item);
   };
 
-  const nameColumnsList = columnsList
-    .filter((column) => {
-      return column.id !== columnItem.id;
-    })
-    .map((column) => {
-      return column.id;
-    });
-
   return (
     <ColumnForm
       name="Update Column"
       saveFunc={saveFunc}
       initialColumnItem={columnItem}
-      nameColumnsList={nameColumnsList}
+      columnsList={columnsList.filter((column) => {
+        return column.id !== columnItem.id;
+      })}
       canselFunc={() => {
         if (onClickCanselBtn) onClickCanselBtn();
       }}

@@ -7,6 +7,7 @@ interface ValidatorProps {
     maxlength?: number;
     minlength?: number;
     pattern?: string;
+    noRepeat?: string[];
   };
 }
 
@@ -15,6 +16,7 @@ interface validatorMessage {
   maxlength?: string;
   minlength?: string;
   pattern?: string;
+  noRepeat?: string;
 }
 
 export interface ValidationReturn {
@@ -28,7 +30,7 @@ export const useValidationFieldForm = ({
   value,
   options,
 }: ValidatorProps): ValidationReturn => {
-  const { required, maxlength, minlength, pattern } = options;
+  const { required, maxlength, minlength, pattern, noRepeat } = options;
 
   let firstValueIsDirty: boolean = false;
 
@@ -40,6 +42,7 @@ export const useValidationFieldForm = ({
 
   const [isDirty, setIsDirty] = useState<boolean>(firstValueIsDirty);
   const [isRequired, setIsRequired] = useState<boolean>(true);
+  const [isNoRepeat, setIsNoRepeat] = useState<boolean>(true);
   const [isMinLength, setIsMinLength] = useState<boolean>(true);
   const [isMaxLength, setIsMaxLength] = useState<boolean>(true);
   const [isValidPattern, setIsValidPattern] = useState<boolean>(true);
@@ -49,6 +52,7 @@ export const useValidationFieldForm = ({
     () => {
       const mess: validatorMessage = message;
       let requiredStatus = true;
+      let noRepeatStatus = true;
       let minLengthStatus = true;
       let maxLengthStatus = true;
       let validPatternStatus = true;
@@ -92,16 +96,24 @@ export const useValidationFieldForm = ({
             mess.pattern = "Поле заполнено не по паттерну";
           }
         }
+        if (noRepeat && typeof item === "string") {
+          if (noRepeat.includes(item)) {
+            noRepeatStatus = false;
+            mess.noRepeat = "Такое имя уже существует, выберете другое";
+          }
+        }
       };
 
       validityСheckItem(value);
 
       if (requiredStatus) mess.required = "";
+      if (noRepeatStatus) mess.noRepeat = "";
       if (minLengthStatus) mess.minlength = "";
       if (maxLengthStatus) mess.maxlength = "";
       if (validPatternStatus) mess.pattern = "";
 
       setIsRequired(requiredStatus);
+      setIsNoRepeat(noRepeatStatus);
       setIsMinLength(minLengthStatus);
       setIsMaxLength(maxLengthStatus);
       setIsValidPattern(validPatternStatus);
@@ -114,7 +126,8 @@ export const useValidationFieldForm = ({
   return {
     isDirty,
     setIsDirty,
-    isValid: isRequired && isMinLength && isMaxLength && isValidPattern,
+    isValid:
+      isRequired && isMinLength && isMaxLength && isValidPattern && isNoRepeat,
     message,
   };
 };
