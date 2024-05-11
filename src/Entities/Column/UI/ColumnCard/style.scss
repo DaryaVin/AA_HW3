@@ -24,6 +24,10 @@
                 border-radius: 50%;
                 color: white;
                 background-color: #6e41e2;
+                transition: 0.5s;
+                &:hover{
+                    background-color: #5835b0;
+                }
             }
         }
         .edit-del{
@@ -62,6 +66,7 @@
         transition: 0.5s;
         &:hover{
             transform: scale(1.009);
+            box-shadow: 8px 8px 10px #ddd;
         }
     }
     ::-webkit-scrollbar{
