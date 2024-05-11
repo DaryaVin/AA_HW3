@@ -8,10 +8,15 @@ import { UpdateTaskForm } from "../../Entities/Task";
 import { TaskItem } from "../../Entities/Task/Model/type";
 import TaskCard from "../../Entities/Task/Model/Ui/TaskCard/ui";
 
-interface TaskCardWrapProps extends TaskItem {
-    
+interface TaskCardWrapProps {
+    TaskItem: TaskItem;
+    color: {
+        r: number;
+        g: number;
+        b: number;
+    }
 }
-export const TaskCardWrap = ({ ...props }: TaskCardWrapProps) => {
+export const TaskCardWrap = ({TaskItem, color }: TaskCardWrapProps) => {
   // const dispatch = useAppDispatch();
   // 
     const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
@@ -20,13 +25,13 @@ export const TaskCardWrap = ({ ...props }: TaskCardWrapProps) => {
 
     return (
         <>
-        <TaskCard  {...props}
-            name={""} 
-            id={""}
-            description={""}
-            status=""
-            tag={[""]}
-            color={{ r: 0, g: 0, b: 0 }}
+        <TaskCard
+            name={TaskItem.name} 
+            id={TaskItem.id}
+            description={TaskItem.description}
+            status={TaskItem.status}
+            tag={TaskItem.tags}
+            color={color}
             editFun={() => { setShowUpdateTask(true) }} 
             deleteFun={() => { console.log("dfsfs") }} 
             />

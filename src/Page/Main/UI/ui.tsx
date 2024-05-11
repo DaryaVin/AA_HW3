@@ -20,13 +20,10 @@ export const MainPage = () => {
     <main className="mainPage">
       <CreateAndFilterForm />
       {/* <ColumnsWithTasksList /> */}
-      <ColumnCardWrap name="Kosoom Elsisi" id="df" color={{ r: 255, g: 255, b: 0 }} position="1">
-        {[
-        <TaskCardWrap name="kjkjklj" id="k" description="kjlfsk" status="sdf" tags={["sdf"]}/>,
-        <TaskCardWrap name="kjkjklj" id="kd" description="kjlfsk" status="sdf" tags={["sdf"]}  />,
-        <TaskCardWrap name="kjkjklj" id="ks" description="kjlfsk" status="sdf" tags={["sdf"]} />
-      ] }
-        
+      <ColumnCardWrap ColumnItem={{name:"Kosoom Elsisi", id:"df", color:{ r: 255, g: 255, b: 0 }, position:"1"}}>
+          <TaskCardWrap TaskItem={{name:"kjkjklj", id:"k", description:"kjlfsk", status:"sdf", tags:["sdf"] }}/>
+          <TaskCardWrap TaskItem={{name:"kjkjklj", id:"k", description:"kjlfsk", status:"sdf", tags:["sdf"]}}/>
+          <TaskCardWrap TaskItem={{name:"kjkjklj", id:"k", description:"kjlfsk", status:"sdf", tags:["sdf"]}}/>
       </ColumnCardWrap>
 
     </main>

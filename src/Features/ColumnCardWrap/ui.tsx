@@ -5,11 +5,13 @@ import {ColumnItem} from "../../Entities/Column";
 import { useAppDispatch, useAppSelector } from "../../Shared";
 import { UpdateColumnForm } from "../../Entities/Column";
 import { CreateTaskForm } from "../../Entities/Task";
+import { deleteColumnActionCreator } from "../../Entities/Column/Store/actionCreator";
 
-interface ColumnCardWrapProps extends ColumnItem {
+interface ColumnCardWrapProps {
   children: JSX.Element[];
+  ColumnItem: ColumnItem;
 }
-export const ColumnCardWrap = ({ children, ...props }: ColumnCardWrapProps) => {
+export const ColumnCardWrap = ({ children, ColumnItem }: ColumnCardWrapProps) => {
   const dispatch = useAppDispatch();
   // 
   const ColumnsState = useAppSelector((state) => state.ColumnsReducer);
@@ -20,12 +22,12 @@ export const ColumnCardWrap = ({ children, ...props }: ColumnCardWrapProps) => {
   return (
     <>
       <ColumnCard  
-        color={{ r: 0, g: 255, b: 0 }}
-        name={"Done"} 
-        position='1'
-        id={"dnckdmnc"}
+        color={ColumnItem.color}
+        name={ColumnItem.name} 
+        position={ColumnItem.position}
+        id={ColumnItem.id}
         editFun={() => { setShowUpdateColumn(true) }} 
-        deleteFun={() => { console.log("dsfsdf") }}
+        deleteFun={() => { dispatch(deleteColumnActionCreator(ColumnItem)) }}
         addFun={() => { setShowCreateTask(true) }}
         >
           {children}
