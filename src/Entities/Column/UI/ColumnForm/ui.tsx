@@ -131,6 +131,10 @@ export const ColumnForm = ({
             "RGB(108, 191, 239)",
             "RGB(163, 217, 130)",
             "RGB(240, 118, 107)",
+            "RGB(122, 122, 246)",
+            "RGB(228, 113, 249)",
+            "RGB(242, 193, 78)",
+            "RGB(84, 191, 20)",
           ]}
           label={"Color"}
           value={`RGB(${columnItem.color.r}, ${columnItem.color.g}, ${columnItem.color.b})`}

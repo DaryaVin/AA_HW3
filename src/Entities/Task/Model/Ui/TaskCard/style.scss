@@ -47,6 +47,7 @@
         margin: 0 0 8px 0;
         @include paragraph3;
         color: #6C6C6C;
+        word-wrap: break-word;
     }
     .status{
         margin-bottom: 8px;

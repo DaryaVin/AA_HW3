@@ -47,7 +47,7 @@ export const ColumnsWithTasksList = () => {
       );
     }
     return (
-      <ul>
+      <ul className="all-cards">
         {filterColumns(ColumnsState.columns).length !== 0 ? (
           filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
             return (
