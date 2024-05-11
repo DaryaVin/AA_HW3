@@ -7,6 +7,7 @@
 1. TypeScript
 2. React
 3. SCSS
+4. Redux toolkit
 
 Версия ноды - v18.17.1
 
