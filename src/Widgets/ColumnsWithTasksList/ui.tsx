@@ -19,7 +19,7 @@ export const ColumnsWithTasksList = () => {
       if (indexColumnWithCurrentPosition < 0) break;
 
       sortColumnList.push(copyColumnsList[indexColumnWithCurrentPosition]);
-      currentPosition = copyColumnsList[indexColumnWithCurrentPosition].name;
+      currentPosition = copyColumnsList[indexColumnWithCurrentPosition].id;
       copyColumnsList.splice(indexColumnWithCurrentPosition, 1);
     }
     return sortColumnList;
@@ -66,15 +66,6 @@ export const ColumnsWithTasksList = () => {
                         );
                       })}
                   </ColumnCardWrap>
-
-                  {/* <span>{column.name}</span>
-                  <ul>
-                    {TasksState.tasks
-                      .filter((task) => task.status === column.name)
-                      .map((task) => {
-                        return <li key={task.id}>{task.name}</li>;
-                      })}
-                  </ul> */}
                 </li>
               );
             })

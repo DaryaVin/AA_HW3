@@ -37,13 +37,13 @@ export const ColumnForm = ({
     ({
       id: "",
       name: "",
-      color:{
-        r:0,
+      color: {
+        r: 0,
         g: 0,
-        b:0,
+        b: 0,
       },
       position: "",
-    }as ColumnItem);
+    } as ColumnItem);
   const [columnItem, setColumnItem] = useState<ColumnItem>(initialValue);
   const [isValidName, setIsValidName] = useState<boolean>(true);
   const [isValidColor, setIsValidColor] = useState<boolean>(true);
@@ -114,15 +114,6 @@ export const ColumnForm = ({
           setIsValidColor(v);
         }}
       >
-        {/* <ColorSelect
-          options={["red", "pink", "blue", "green", "white"]}
-          label={"Color"}
-          value={columnItem.color}
-          setValue={(v) => {
-            if (!Array.isArray(v)) setColumnItem({ ...columnItem, color: v });
-          }}
-        /> */}
-
         <ColorSelect
           options={[
             "RGB(187, 191, 196)",
@@ -154,7 +145,6 @@ export const ColumnForm = ({
             }
           }}
         />
-
       </ValidationWrap>
       <ValidationWrap
         generalDirty={formDirty}
