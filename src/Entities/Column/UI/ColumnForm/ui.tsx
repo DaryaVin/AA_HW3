@@ -125,17 +125,15 @@ export const ColumnForm = ({
 
         <ColorSelect
           options={[
-            // "RGB(255, 0, 0)", 
-            // "RGB(0, 255, 0)", 
-            // "RGB(0, 0, 255)", 
-            // "RGB(0, 0, 0)",
-            // "RGB(255, 255, 255)",
             "RGB(187, 191, 196)",
             "RGB(98, 83, 218)",
             "RGB(108, 191, 239)",
             "RGB(163, 217, 130)",
             "RGB(240, 118, 107)",
-            "RGB(187, 191, 196)", 
+            "RGB(122, 122, 246)",
+            "RGB(228, 113, 249)",
+            "RGB(242, 193, 78)",
+            "RGB(84, 191, 20)"
           ]}
           label={"Color"}
           value={`RGB(${columnItem.color.r}, ${columnItem.color.g}, ${columnItem.color.b})`}
