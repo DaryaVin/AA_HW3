@@ -7,6 +7,7 @@ type ValidationWrapProps = {
   required?: boolean;
   maxlength?: number;
   minlength?: number;
+  noRepeat?: string[];
   pattern?: string;
   generalDirty?: boolean;
   setIsValid?: (val: boolean) => void;
@@ -20,6 +21,7 @@ export const ValidationWrap = ({
   maxlength,
   minlength,
   pattern,
+  noRepeat,
   generalDirty,
   setIsValid,
   value,
@@ -33,6 +35,7 @@ export const ValidationWrap = ({
       maxlength,
       minlength,
       pattern,
+      noRepeat,
     },
   });
 

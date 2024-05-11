@@ -19,7 +19,7 @@ export const ColumnsWithTasksList = () => {
       if (indexColumnWithCurrentPosition < 0) break;
 
       sortColumnList.push(copyColumnsList[indexColumnWithCurrentPosition]);
-      currentPosition = copyColumnsList[indexColumnWithCurrentPosition].name;
+      currentPosition = copyColumnsList[indexColumnWithCurrentPosition].id;
       copyColumnsList.splice(indexColumnWithCurrentPosition, 1);
     }
     return sortColumnList;
@@ -46,41 +46,68 @@ export const ColumnsWithTasksList = () => {
         </div>
       );
     }
-    return (
-      <ul>
-        {filterColumns(ColumnsState.columns).length !== 0
-          ? filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
-              return (
-                <li key={column.id}>
-                  <ColumnCardWrap ColumnItem={column}>
-                    {TasksState.tasks
-                      .filter((task) => task.status === column.name)
-                      .map((task) => {
-                        return (
-                          <li key={task.id}>
-                            <TaskCardWrap
-                              TaskItem={task}
-                              color={column.color}
-                            />
-                          </li>
-                        );
-                      })}
-                  </ColumnCardWrap>
 
-                  {/* <span>{column.name}</span>
-                  <ul>
-                    {TasksState.tasks
-                      .filter((task) => task.status === column.name)
-                      .map((task) => {
-                        return <li key={task.id}>{task.name}</li>;
-                      })}
-                  </ul> */}
-                </li>
-              );
-            })
-          : ColumnsState.filter
-          ? "No columns were found by your filter"
-          : "There are no columns yet, create at least one"}
+    const onDropTask = (e: React.DragEvent<HTMLLIElement>) => {
+      e.preventDefault();
+      console.log("onDropTask", e.target);
+    };
+    const onDragStartTask = (e: React.DragEvent<HTMLLIElement>) => {
+      console.log("onDragStartTask", e.target);
+    };
+    const onDragEndTask = (e: React.DragEvent<HTMLLIElement>) => {
+      console.log("onDragEndTask", e.target);
+    };
+    const onDragLeaveTask = (e: React.DragEvent<HTMLLIElement>) => {
+      console.log("onDragLeaveTask", e.target);
+    };
+    const onDragOverTask = (e: React.DragEvent<HTMLLIElement>) => {
+      e.preventDefault();
+      console.log("onDragOverTask", e.target);
+    };
+
+    return (
+      <ul className="all-cards">
+        {filterColumns(ColumnsState.columns).length !== 0 ? (
+          filterColumns(sortColumns(ColumnsState.columns)).map((column) => {
+            return (
+              <li key={column.id}>
+                <ColumnCardWrap ColumnItem={column}>
+                  {TasksState.tasks
+                    .filter((task) => task.idColumn === column.id)
+                    .map((task) => {
+                      return (
+                        <li
+                          key={task.id}
+                          draggable
+                          onDrop={(e) => {
+                            onDropTask(e);
+                          }}
+                          onDragStart={(e) => {
+                            onDragStartTask(e);
+                          }}
+                          onDragEnd={(e) => {
+                            onDragEndTask(e);
+                          }}
+                          onDragLeave={(e) => {
+                            onDragLeaveTask(e);
+                          }}
+                          onDragOver={(e) => {
+                            onDragOverTask(e);
+                          }}
+                        >
+                          <TaskCardWrap TaskItem={task} color={column.color} />
+                        </li>
+                      );
+                    })}
+                </ColumnCardWrap>
+              </li>
+            );
+          })
+        ) : ColumnsState.filter ? (
+          <span>No columns were found by your filter</span>
+        ) : (
+          <span>There are no columns yet, create at least one</span>
+        )}
       </ul>
     );
   }

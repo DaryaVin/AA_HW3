@@ -4,4 +4,5 @@ export interface TaskItem {
   description: string;
   tags: string[];
   status: string;
+  idColumn: string;
 }

@@ -13,8 +13,6 @@ interface Props extends TaskItem {
     g: number;
     b: number;
   };
-  description: string;
-  status: string;
 }
 
 const TaskCard = ({
@@ -35,7 +33,7 @@ const TaskCard = ({
   };
 
   return (
-    <div className="card" id={id}>
+    <div className="card" id={id} draggable>
       <div className="header">
         <h5 className="title">{name}</h5>
         <div className="edit-del">

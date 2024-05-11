@@ -18,42 +18,18 @@ export const UpdateColumnForm = ({
 }: UpdateColumnFormProps) => {
   const dispatch = useAppDispatch();
   const saveFunc = async (item: ColumnItem) => {
-    const itemThatComesAfterInNewPlace = columnsList.find((column) => {
-      return column.position === item.position;
-    });
-    const itemThatComesAfterInOldPlace = columnsList.find((column) => {
-      return column.position === columnItem.position;
-    });
-    dispatch(updateColumnActionCreator(item));
-    if (itemThatComesAfterInNewPlace) {
-      dispatch(
-        updateColumnActionCreator({
-          ...itemThatComesAfterInNewPlace,
-          position: item.name,
-        })
-      );
-    }
-    if (itemThatComesAfterInOldPlace) {
-      dispatch(
-        updateColumnActionCreator({
-          ...itemThatComesAfterInOldPlace,
-          position: columnItem.position,
-        })
-      );
-    }
+    dispatch(updateColumnActionCreator(columnItem, item, columnsList));
     if (onClickSaveBtn) onClickSaveBtn(item);
   };
-
-  const nameColumnsList = columnsList.map((column) => {
-    return column.name;
-  });
 
   return (
     <ColumnForm
       name="Update Column"
       saveFunc={saveFunc}
       initialColumnItem={columnItem}
-      nameColumnsList={nameColumnsList}
+      columnsList={columnsList.filter((column) => {
+        return column.id !== columnItem.id;
+      })}
       canselFunc={() => {
         if (onClickCanselBtn) onClickCanselBtn();
       }}

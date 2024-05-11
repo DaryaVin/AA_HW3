@@ -6,11 +6,13 @@ import { useAppDispatch } from "../../../../Shared";
 
 interface CreateTaskFormProps {
   status: string;
+  idColumn: string;
   onClickSaveBtn?: (v?: TaskItem) => void;
   onClickCanselBtn?: () => void;
 }
 export const CreateTaskForm = ({
   status,
+  idColumn,
   onClickSaveBtn,
   onClickCanselBtn,
 }: CreateTaskFormProps) => {
@@ -24,6 +26,7 @@ export const CreateTaskForm = ({
   return (
     <TaskForm
       name="Create Task"
+      idColumn={idColumn}
       status={status}
       saveFunc={saveFunc}
       canselFunc={() => {

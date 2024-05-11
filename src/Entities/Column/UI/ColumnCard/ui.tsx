@@ -1,4 +1,4 @@
-import React, { cloneElement, useRef, useState } from "react";
+import React, { cloneElement } from "react";
 import "./style.scss";
 import { ColumnItem } from "../../Model/type";
 import { Button } from "../../../../Shared";
@@ -18,7 +18,6 @@ function ColumnCard({
   color,
   name,
   id,
-  position,
   editFun,
   deleteFun,
   addFun,
@@ -93,12 +92,14 @@ function ColumnCard({
           backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b}, 20%)`,
         }}
       >
-        {children.map((child) => {
-          return cloneElement(child, {
-            ...child.props,
-            color: color,
-          });
-        })}
+        <ul>
+          {children.map((child) => {
+            return cloneElement(child, {
+              ...child.props,
+              color: color,
+            });
+          })}
+        </ul>
       </div>
     </div>
   );
