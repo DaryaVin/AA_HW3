@@ -50,7 +50,7 @@ function ColumnCard({
         <div className="edit-del">
           <Button
             onClick={editColumn}
-            className="edit-icon"
+            className="edit-icon" 
             label={
               <svg
                 width="13"
